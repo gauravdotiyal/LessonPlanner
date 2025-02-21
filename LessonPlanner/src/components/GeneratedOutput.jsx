@@ -1,26 +1,26 @@
-import React, { useRef } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Download } from 'lucide-react';
+import React, { useRef } from "react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Download } from "lucide-react";
 
 const GeneratedOutput = ({ generatedPlan = {} }) => {
   const contentRef = useRef();
 
   const {
-    topic = 'Untitled Topic',
-    date = '',
-    subject = '',
-    gradeLevel = '',
-    mainConcept = '',
-    subtopics = '',
-    materials = '',
-    objectives = '',
-    outline = '',
-    notes = ''
+    topic = "Untitled Topic",
+    date = "",
+    subject = "",
+    gradeLevel = "",
+    mainConcept = "",
+    subtopics = "",
+    materials = "",
+    objectives = "",
+    outline = "",
+    notes = "",
   } = generatedPlan;
 
   const cleanContent = (text) => {
-    if (!text) return '';
-    return text.replace(/^[*\-.\d\s]+/, '').trim();
+    if (!text) return "";
+    return text.replace(/^[*\-.\d\s]+/, "").trim();
   };
 
   const handleDownload = () => {
@@ -126,16 +126,20 @@ const GeneratedOutput = ({ generatedPlan = {} }) => {
 
             <div class="section-header dark">Materials Needed</div>
             <div class="content-section">
-              ${materials.split('\n').filter(Boolean).map(line => 
-                `<p>${cleanContent(line)}</p>`
-              ).join('')}
+              ${materials
+                .split("\n")
+                .filter(Boolean)
+                .map((line) => `<p>${cleanContent(line)}</p>`)
+                .join("")}
             </div>
 
             <div class="section-header">Learning Objectives</div>
             <div class="content-section">
-              ${objectives.split('\n').filter(Boolean).map(line => 
-                `<p>${cleanContent(line)}</p>`
-              ).join('')}
+              ${objectives
+                .split("\n")
+                .filter(Boolean)
+                .map((line) => `<p>${cleanContent(line)}</p>`)
+                .join("")}
             </div>
 
             <div class="section-header dark">Lesson Outline</div>
@@ -149,40 +153,46 @@ const GeneratedOutput = ({ generatedPlan = {} }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  ${outline.split('\n').filter(Boolean).map(line => {
-                    const parts = line.split('|').map(part => part.trim());
-                    return `
+                  ${outline
+                    .split("\n")
+                    .filter(Boolean)
+                    .map((line) => {
+                      const parts = line.split("|").map((part) => part.trim());
+                      return `
                       <tr>
-                        <td>${parts[0] || ''}</td>
-                        <td>${parts[1] || ''}</td>
-                        <td>${parts[2] || ''}</td>
+                        <td>${parts[0] || ""}</td>
+                        <td>${parts[1] || ""}</td>
+                        <td>${parts[2] || ""}</td>
                       </tr>
                     `;
-                  }).join('')}
+                    })
+                    .join("")}
                 </tbody>
               </table>
             </div>
 
             <div class="section-header">Notes</div>
             <div class="content-section">
-              ${notes.split('\n').filter(Boolean).map(line => 
-                `<p>${cleanContent(line)}</p>`
-              ).join('')}
+              ${notes
+                .split("\n")
+                .filter(Boolean)
+                .map((line) => `<p>${cleanContent(line)}</p>`)
+                .join("")}
             </div>
           </div>
         </body>
       </html>
     `;
 
-    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const blob = new Blob([htmlContent], { type: "text/html" });
     const url = URL.createObjectURL(blob);
-    
-    const link = document.createElement('a');
+
+    const link = document.createElement("a");
     link.href = url;
     link.download = `${topic}_LessonPlan.html`;
     document.body.appendChild(link);
     link.click();
-    
+
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
@@ -195,39 +205,67 @@ const GeneratedOutput = ({ generatedPlan = {} }) => {
       <CardContent className="space-y-4">
         <div className="bg-indigo-500 text-white p-2 font-bold">Summary</div>
         <div className="grid grid-cols-2 gap-2">
-          <div><strong>Date:</strong> {date}</div>
-          <div><strong>Subject:</strong> {subject}</div>
-          <div><strong>Grade Level:</strong> {gradeLevel}</div>
-          <div><strong>Main Concept:</strong> {mainConcept}</div>
-          <div><strong>Subtopics:</strong> {subtopics}</div>
+          <div>
+            <strong>Date:</strong> {date}
+          </div>
+          <div>
+            <strong>Subject:</strong> {subject}
+          </div>
+          <div>
+            <strong>Grade Level:</strong> {gradeLevel}
+          </div>
+          <div>
+            <strong>Main Concept:</strong> {mainConcept}
+          </div>
+          <div>
+            <strong>Subtopics:</strong> {subtopics}
+          </div>
         </div>
 
-        <div className="bg-gray-800 text-white p-2 font-bold mt-4">Materials Needed</div>
+        <div className="bg-gray-800 text-white p-2 font-bold mt-4">
+          Materials Needed
+        </div>
         <div className="bg-gray-100 p-4 rounded-md">
-          {materials.split('\n').filter(Boolean).map((line, index) => (
-            <p key={index}>{cleanContent(line)}</p>
-          ))}
+          {materials
+            .split("\n")
+            .filter(Boolean)
+            .map((line, index) => (
+              <p key={index}>{cleanContent(line)}</p>
+            ))}
         </div>
 
-        <div className="bg-indigo-500 text-white p-2 font-bold mt-4">Learning Objectives</div>
+        <div className="bg-indigo-500 text-white p-2 font-bold mt-4">
+          Learning Objectives
+        </div>
         <div className="bg-gray-100 p-4 rounded-md">
-          {objectives.split('\n').filter(Boolean).map((line, index) => (
-            <p key={index}>{cleanContent(line)}</p>
-          ))}
+          {objectives
+            .split("\n")
+            .filter(Boolean)
+            .map((line, index) => (
+              <p key={index}>{cleanContent(line)}</p>
+            ))}
         </div>
 
-        <div className="bg-gray-800 text-white p-2 font-bold mt-4">Lesson Outline</div>
+        <div className="bg-gray-800 text-white p-2 font-bold mt-4">
+          Lesson Outline
+        </div>
         <div className="bg-gray-100 p-4 rounded-md">
-          {outline.split('\n').filter(Boolean).map((line, index) => (
-            <p key={index}>{cleanContent(line)}</p>
-          ))}
+          {outline
+            .split("\n")
+            .filter(Boolean)
+            .map((line, index) => (
+              <p key={index}>{cleanContent(line)}</p>
+            ))}
         </div>
 
         <div className="bg-indigo-500 text-white p-2 font-bold mt-4">Notes</div>
         <div className="bg-gray-100 p-4 rounded-md">
-          {notes.split('\n').filter(Boolean).map((line, index) => (
-            <p key={index}>{cleanContent(line)}</p>
-          ))}
+          {notes
+            .split("\n")
+            .filter(Boolean)
+            .map((line, index) => (
+              <p key={index}>{cleanContent(line)}</p>
+            ))}
         </div>
 
         <button
