@@ -10,6 +10,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import GeneratedOutput from "./GeneratedOutput";
+import { useNavigate } from "react-router-dom";
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 const LessonPlanner = () => {
@@ -27,6 +28,7 @@ const LessonPlanner = () => {
   });
 
   const [generatedPlan, setGeneratedPlan] = useState(null);
+  const navigate=useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -109,7 +111,7 @@ const LessonPlanner = () => {
         return "Error generating formatted content.";
       } else {
         const data = await response.json();
-        console.log(data);
+        // console.log(data.candidates?.[0]?.content?.parts?.[0]?.text);
         return (
           data.candidates?.[0]?.content?.parts?.[0]?.text ||
           "No formatted content generated"
