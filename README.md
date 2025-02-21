@@ -1,5 +1,44 @@
 # Lesson Plan Generator with PDF Download
 
+## 💻 Usage
+
+1. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+2. Open your browser and navigate to `http://localhost:5173`
+
+3. Log in using your credentials- Demo credentials are shown in login page
+
+4. Create a lesson plan by providing the following information: Fill these details properly with good keywords so ai will generate it properly
+   - Topic
+   - Date
+   - Subject
+   - Grade Level
+   - Main Concept
+   - Subtopics
+   - Materials
+   - Learning Objectives
+   - Lesson Outline
+   - Notes
+
+5. For the lesson outline, use the following format for better organization in the downloaded version:
+```javascript
+const outline = "10:00-10:15 | Introduction | Overview of today's lesson\n" +
+                "10:15-10:45 | Main Activity | Group work on problem sets\n" +
+                "10:45-11:00 | Conclusion | Review and homework assignment"
+```
+6. Wait for some time as it make the **gemini api call** which is generating lesson plan which takes time.
+7. The AI will generate the lesson plan using the Google Gemini API.
+6. Click the "Download Lesson Plan" button to save your lesson plan as an HTML file.
+
+
+
+ 
+
 A React application built with Vite that allows users to create and download lesson plans. The application features a modern UI built with shadcn/ui components and Tailwind CSS, with the ability to download lesson plans as HTML files.
 
 ## 🚀 Features
@@ -87,39 +126,6 @@ Components:
 - **LessonPlanner.jsx**: Contains the form and logic for creating lesson plans
 - **Login.jsx**: Manages user authentication and login functionality
 
-## 💻 Usage
-
-1. Start the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-2. Open your browser and navigate to `http://localhost:5173`
-
-3. Log in using your credentials
-
-4. Create a lesson plan by providing the following information:
-   - Topic
-   - Date
-   - Subject
-   - Grade Level
-   - Main Concept
-   - Subtopics
-   - Materials
-   - Learning Objectives
-   - Lesson Outline
-   - Notes
-
-5. For the lesson outline, use the following format for better organization in the downloaded version:
-```javascript
-const outline = "10:00-10:15 | Introduction | Overview of today's lesson\n" +
-                "10:15-10:45 | Main Activity | Group work on problem sets\n" +
-                "10:45-11:00 | Conclusion | Review and homework assignment"
-```
-
-6. Click the "Download Lesson Plan" button to save your lesson plan as an HTML file.
 
 ## 🎨 Customization
 
@@ -139,10 +145,7 @@ const outline = "10:00-10:15 | Introduction | Overview of today's lesson\n" +
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+ 
 
 ## 🙏 Acknowledgments
 
