@@ -50,9 +50,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return (
-       <LessonPlanner/>
-    );
+    return <LessonPlanner />;
   }
 
   return (
