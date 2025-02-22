@@ -13,17 +13,17 @@ yarn dev
 
 3. Log in using your credentials- Demo credentials are shown in login page
 
-4. Create a lesson plan by providing the following information: Fill these details properly with good keywords so ai will generate it properly
-   - Topic
-   - Date
-   - Subject
-   - Grade Level
-   - Main Concept
-   - Subtopics
-   - Materials
-   - Learning Objectives
-   - Lesson Outline
-   - Notes
+4. Create a lesson plan by providing the following information: Fill these details properly with good keywords so ai will generate it properly for example:
+   - Topic : Write the name of Main Topic. Ex: Gravitation   
+   - Date : Write date on which you are gonna teach the topic. Ex: 10/12/2024
+   - Subject : Write Subject Name Ex: Physics
+   - Grade Level : Write Grade you are gonna teach. Ex: 10 
+   - Main Concept : Write the concept name you are going to teach.
+   - Subtopics : Write the input subtopics related to you topic.
+   - Materials: Write Ex : "What are the materials neededed for Study Gravitation" 
+   - Learning Objectives: Write Ex:  "What are objectives of learning Gravitation" 
+   - Lesson Outline: Write Ex : "What is lesson outline of Learning Gravitation" 
+   - Notes : Write Ex: "Notes and Assignment for Gravitation" 
 
 5. For the lesson outline, use the following format for better organization in the downloaded version:
 ```javascript
