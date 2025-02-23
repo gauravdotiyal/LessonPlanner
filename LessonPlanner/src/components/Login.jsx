@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Lock, Mail, Loader2, User } from "lucide-react";
 import LessonPlanner from "./LessonPlanner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,86 +53,88 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <LessonPlanner />;
+    return navigate("/lessonPlanner");
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
-          <CardDescription>
-            Enter your credentials to access your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <Alert variant="destructive" className="mb-6">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
-                Email
-              </Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                <Input
-                  id="email"
-                  placeholder="Enter your email"
-                  type="email"
-                  className="pl-9"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-sm font-medium">
-                Password
-              </Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  className="pl-9"
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign in"
+    <div class="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]">
+      <div className="min-h-screen flex items-center justify-center ">
+        <Card className="w-full max-w-md shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+            <CardDescription>
+              Enter your credentials to access your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <Alert variant="destructive" className="mb-6">
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
               )}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
-          <div className="text-sm text-slate-500 text-center">
-            Demo credentials:
-            <br />
-            Email: demouser@gmail.com
-            <br />
-            Password: demopass
-          </div>
-        </CardFooter>
-      </Card>
+
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                  <Input
+                    id="email"
+                    placeholder="Enter your email"
+                    type="email"
+                    className="pl-9"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-medium">
+                  Password
+                </Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    className="pl-9"
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Signing in...
+                  </>
+                ) : (
+                  "Sign in"
+                )}
+              </Button>
+            </form>
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-4">
+            <div className="text-sm text-slate-500 text-center">
+              Demo credentials:
+              <br />
+              Email: demouser@gmail.com
+              <br />
+              Password: demopass
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 };

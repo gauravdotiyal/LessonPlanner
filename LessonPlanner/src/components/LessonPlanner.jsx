@@ -9,8 +9,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import GeneratedOutput from "./GeneratedOutput";
-import { useNavigate } from "react-router-dom";
+import GeneratedOutput from "./GeneratedOutput"; 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 const LessonPlanner = () => {
@@ -28,7 +27,8 @@ const LessonPlanner = () => {
   });
 
   const [generatedPlan, setGeneratedPlan] = useState(null);
-  const navigate=useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // 🔄 Loading State
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +36,7 @@ const LessonPlanner = () => {
   };
 
   const handleGeneratePlan = async () => {
+    setIsLoading(true); // Start loading
     const fieldsToGenerate = ["materials", "objectives", "outline", "notes"];
     const generatedContent = {};
 
@@ -49,11 +50,7 @@ const LessonPlanner = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              contents: [
-                {
-                  parts: [{ text: prompt }],
-                },
-              ],
+              contents: [{ parts: [{ text: prompt }] }],
             }),
           }
         );
@@ -78,10 +75,8 @@ const LessonPlanner = () => {
       }
     }
 
-    setGeneratedPlan({
-      ...formData,
-      ...generatedContent,
-    });
+    setGeneratedPlan({ ...formData, ...generatedContent });
+    setIsLoading(false); // Stop loading
   };
 
   const formatContent = async (plan) => {
@@ -111,7 +106,6 @@ const LessonPlanner = () => {
         return "Error generating formatted content.";
       } else {
         const data = await response.json();
-        // console.log(data.candidates?.[0]?.content?.parts?.[0]?.text);
         return (
           data.candidates?.[0]?.content?.parts?.[0]?.text ||
           "No formatted content generated"
@@ -166,9 +160,18 @@ const LessonPlanner = () => {
           <Textarea name="notes" placeholder="Notes" onChange={handleChange} />
         </CardContent>
         <CardFooter>
-          <Button onClick={handleGeneratePlan}>Generate Lesson Plan</Button>
+          <Button onClick={handleGeneratePlan} disabled={isLoading}>
+            {isLoading ? "Generating..." : "Generate Lesson Plan"}
+          </Button>
         </CardFooter>
       </Card>
+
+      {/* 🔄 Show Loader When Generating */}
+      {isLoading && (
+        <div className="text-center text-blue-600 font-bold animate-pulse">
+          Generating Lesson Plan... Please wait ⏳
+        </div>
+      )}
 
       {generatedPlan && <GeneratedOutput generatedPlan={generatedPlan} />}
     </div>
